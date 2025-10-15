@@ -4,29 +4,46 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp,} from "react-nati
 import { useNavigation } from "@react-navigation/native";
 
 export default function Recipe({ categories, foods }) {
-  const navigation = useNavigation();
+    console.log('Foods:', foods);
 
-  const renderItem = ({ item, index }) => (
-<ArticleCard item={item} index={index} navigation={navigation} />
-  );
+    const navigation = useNavigation();
 
-  return (
-    <View style={styles.container}>
-      <View testID="recipesDisplay">
-            
-      </View>
-    </View>
-  );
+    const renderItem = ({ item, index }) => (
+        <ArticleCard item={item} index={index} navigation={navigation} />
+    );
+
+    return (
+        <View style={styles.container}>
+            <View testID="recipesDisplay">
+                <FlatList
+                    data={foods}
+                    numColumns={2}
+                    keyExtractor={item => item.idFood}
+                    renderItem={renderItem}
+                />
+            </View>
+        </View>
+    );
 }
 
 const ArticleCard = ({ item, index, navigation }) => {
-  return (
-    <View
-      style={[styles.cardContainer, { paddingLeft: 20, paddingRight: 15}]} testID="articleDisplay"
-    >
-   
-    </View>
-  );
+    return (
+        <View
+          style={[styles.cardContainer, { paddingLeft: 20, paddingRight: 15}]} testID="articleDisplay"
+        >
+            <TouchableOpacity
+                onPress={() => navigation.navigate('RecipeDetail')}
+            >
+                <Image
+                    source={{ uri: item.recipeImage }}
+                    style={styles.articleImage}
+                />
+                <Text style={styles.articleText}>{item.recipeName}</Text>
+                <Text style={styles.articleDescription}>{item.cookingDescription}</Text>
+
+            </TouchableOpacity>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -50,7 +67,7 @@ const styles = StyleSheet.create({
   },
   articleImage: {
     width: "100%",
-   
+    height: hp(25),
     borderRadius: 35,
     backgroundColor: "rgba(0, 0, 0, 0.05)", // bg-black/5
   },
