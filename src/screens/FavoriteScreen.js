@@ -22,6 +22,19 @@ export default function FavoriteScreen() {
   const favoriteRecipesList = favoriteRecipes?.favoriterecipes || [];
   console.log(favoriteRecipes.favoriterecipes);
   console.log('favoriteRecipesList',favoriteRecipesList);
+
+    const renderItem = ({ item, index }) => (
+        <TouchableOpacity
+            style={styles.cardContainer}
+            onPress={() => navigation.navigate('RecipeDetail', item)}
+        >
+            <Image
+                source={{ uri: item.recipeImage }}
+                style={styles.recipeImage}
+            />
+            <Text style={styles.recipeTitle}>{item.recipeName}</Text>
+        </TouchableOpacity>
+    );
   
   
 
@@ -47,35 +60,40 @@ export default function FavoriteScreen() {
     );
   }
 
-  return (
-    <>
-      {/* Heading */}
-      <View testID="FavoriteRecipes">
-        <Text
-          style={{ fontSize: hp(3.8), marginTop: hp(4), marginLeft: 20 }}
-          className="font-semibold text-neutral-600"
-        >
-          My Favorite Recipes
-        </Text>
-      </View>
-    
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={{
-          backgroundColor: "#2563EB",
-          padding: 10,
-          borderRadius: 5,
-          marginTop: 10,
-          width: 100,
-          alignItems: "center",
-          marginLeft: 20,
-        }}
-      >
-        <Text style={{ color: "#fff" }}>Go back</Text>
-      </TouchableOpacity>
-    
-    </>
-  );
+    return (
+        <>
+            {/* Heading */}
+            <View testID="FavoriteRecipes">
+                <Text
+                style={{ fontSize: hp(3.8), marginTop: hp(4), marginLeft: 20 }}
+                className="font-semibold text-neutral-600"
+                >
+                My Favorite Recipes
+                </Text>
+            </View>
+        
+            <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                style={{
+                    backgroundColor: "#2563EB",
+                    padding: 10,
+                    borderRadius: 5,
+                    marginTop: 10,
+                    width: 100,
+                    alignItems: "center",
+                    marginLeft: 20,
+                }}
+            >
+                <Text style={{ color: "#fff" }}>Go back</Text>
+            </TouchableOpacity>
+
+            <FlatList
+                data={favoriteRecipesList}
+                keyExtractor={item => item.idFood}
+                renderItem={renderItem}
+            />
+        </>
+    );
 }
 
 const styles = StyleSheet.create({
