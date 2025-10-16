@@ -84,13 +84,12 @@ export default function MyRecipeScreen() {
                                     )}
                                     <Text style={styles.recipeTitle}>{recipe.title}</Text>
                                     <Text style={styles.recipeDescription} testID="recipeDescp">
-                                        {recipe.description && (
-                                            recipe.description.length > 50 ? (
-                                                recipe.description.slice(0, 50) + '...'
-                                            ) : (
-                                                recipe.description
-                                            )
-                                        )}
+                                    {recipe.description
+                                        ? recipe.description.length > 50
+                                            ? recipe.description.slice(0, 50) + "..."
+                                            : recipe.description
+                                        : ""
+                                    }
                                     </Text>
                                 </TouchableOpacity>
 
@@ -122,6 +121,7 @@ const styles = StyleSheet.create({
     },
     backButton: {
       marginBottom: hp(1.5),
+      marginTop: 25
     },
     backButtonText: {
       fontSize: hp(2.2),
@@ -158,23 +158,23 @@ const styles = StyleSheet.create({
       marginTop: hp(5),
     },
     recipeCard: {
-      width: 400, // Make recipe card width more compact
-      height: 300, // Adjust the height of the card to fit content
-      backgroundColor: "#fff",
-      padding: wp(3),
-      borderRadius: 8,
-      marginBottom: hp(2),
-      shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      shadowOffset: { width: 0, height: 2 },
-      elevation: 3, // for Android shadow
+        width: "90%",
+        alignSelf: "center",
+        backgroundColor: "#fff",
+        borderRadius: 12,
+        padding: 15,
+        marginVertical: 10,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
     },
     recipeImage: {
-      width: 300, // Set width for recipe image
-      height: 150, // Adjust height of the image
-      borderRadius: 8,
-      marginBottom: hp(1),
+        width: "100%",
+        height: 180,
+        borderRadius: 10,
+        marginBottom: 10,
     },
     recipeTitle: {
       fontSize: hp(2),

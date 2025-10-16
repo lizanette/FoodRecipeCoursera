@@ -1,4 +1,4 @@
-import { View,Text,TextInput,TouchableOpacity,Image,StyleSheet,} from "react-native";
+import { View,Text,TextInput,TouchableOpacity,Image,StyleSheet} from "react-native";
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {widthPercentageToDP as wp,heightPercentageToDP as hp,} from "react-native-responsive-screen";
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginBottom: hp(1.5),
+    marginTop: 25
   },
   backButtonText: {
     fontSize: hp(2.2),
